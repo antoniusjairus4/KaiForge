@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>KaiForge – Forge Your Table Tennis Mastery</title>
+  <meta name="description" content="Track every match, analyze performance, and unlock your potential with KaiForge – the ultimate offline table-tennis companion." />
+
+  <!-- ────────────────  INLINE CSS  ──────────────── -->
+  <style>
+  :root {
+    --clr-primary: #ff5631;
+    --clr-dark: #131417;
+    --clr-light: #f7f8fa;
+    --clr-muted: #737780;
+    --ff-heading: "Inter", system-ui, sans-serif;
+    --ff-body: "Inter", system-ui, sans-serif;
+    --radius: 12px;
+    --shadow: 0 6px 14px rgba(0, 0, 0, 0.07);
+    --transition: 0.25s ease;
+    scroll-behavior: smooth;
+  }
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    font-family: var(--ff-body);
+    line-height: 1.55;
+    color: var(--clr-dark);
+    background: var(--clr-light);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { text-decoration: none; color: inherit }
+  img { max-width: 100%; display: block }
+  h1, h2, h3 {
+    font-family: var(--ff-heading);
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  h1 { font-size: clamp(2.5rem, 6vw, 4rem) }
+  h2 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: .75rem }
+  h3 { font-size: 1.3rem; margin-bottom: .5rem }
+  .container { max-width: 1100px; margin-inline: auto; padding-inline: 1.25rem }
+  section { padding: 4.5rem 0 }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    font-weight: 600; font-size: 1rem; cursor: pointer; border: none;
+    padding: .9rem 1.6rem; border-radius: var(--radius);
+    transition: var(--transition);
+  }
+  .btn--primary { background: var(--clr-primary); color: #fff }
+  .btn--primary:hover { transform: translateY(-1px); box-shadow: var(--shadow) }
+  .btn--outline {
+    background: transparent; border: 2px solid var(--clr-primary); color: var(--clr-primary)
+  }
+  .btn--outline:hover { background: var(--clr-primary); color: #fff }
+
+  .header {
+    background: #fff; position: sticky; top: 0; z-index: 1000; box-shadow: var(--shadow)
+  }
+  .header__content {
+    display: flex; justify-content: space-between; align-items: center; padding: 1rem 0
+  }
+  .header__title { color: var(--clr-primary); font-size: 1.6rem }
+  .header__tagline { font-size: .9rem; color: var(--clr-muted); margin-right: 1rem }
+
+  .hero { background: #fff; padding-top: 6rem }
+  .hero__content { text-align: center }
+  .hero__title { margin-bottom: .75rem }
+  .hero__subtitle {
+    max-width: 700px; margin: 0 auto 2rem; color: var(--clr-muted)
+  }
+  .hero__badges {
+    display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-bottom: 2.5rem
+  }
+  .badge {
+    background: var(--clr-light); border: 1px solid #e4e6eb; border-radius: var(--radius);
+    padding: .9rem 1.1rem; display: flex; gap: .6rem; align-items: center; min-width: 170px
+  }
+  .badge__icon { font-size: 1.4rem }
+  .badge__title { font-weight: 600; line-height: 1 }
+  .badge__subtitle { font-size: .8rem; color: var(--clr-muted); line-height: 1 }
+
+  .features__grid {
+    display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); margin-top: 3rem
+  }
+  .feature-card {
+    background: #fff; border-radius: var(--radius); padding: 2rem 1.5rem; text-align: center;
+    box-shadow: var(--shadow); transition: var(--transition)
+  }
+  .feature-card:hover { transform: translateY(-4px) }
+  .feature-card__icon { font-size: 2.2rem; margin-bottom: .8rem }
+  .feature-card__description { color: var(--clr-muted); font-size: .95rem }
+
+  .pricing__card {
+    background: #fff; border-radius: var(--radius); box-shadow: var(--shadow);
+    display: flex; flex-wrap: wrap; gap: 2rem; padding: 2.5rem
+  }
+  .pricing__offer { flex: 1 1 260px; text-align: center }
+  .pricing__label {
+    display: inline-block; background: var(--clr-primary); color: #fff;
+    padding: .25rem .75rem; border-radius: 999px; font-size: .8rem; margin-bottom: .7rem
+  }
+  .pricing__price {
+    font-size: 3.5rem; font-weight: 700; color: var(--clr-primary); line-height: 1
+  }
+  .pricing__currency { font-size: 1.6rem; position: relative; top: -.6rem }
+  .pricing__terms { color: var(--clr-muted); font-size: .9rem; margin-top: .5rem }
+  .pricing__features { flex: 2 1 300px }
+  .pricing__features-title { margin-bottom: .7rem }
+  .pricing__features-list {
+    list-style: disc; padding-left: 1.3rem; color: var(--clr-muted)
+  }
+  .pricing__features-list li { margin-bottom: .4rem }
+  .pricing__requirements-title { margin: .9rem 0 .4rem }
+  .pricing__requirements-text { font-size: .9rem; color: var(--clr-muted) }
+
+  .contact__card {
+    background: #fff; border-radius: var(--radius); box-shadow: var(--shadow);
+    padding: 2.5rem; text-align: center; max-width: 550px; margin: 0 auto
+  }
+  .contact__info { display: grid; gap: 1.1rem; margin: 1.6rem 0 }
+  .contact__method {
+    display: flex; justify-content: space-between; font-size: .95rem
+  }
+  .contact__label { font-weight: 600 }
+  .contact__pricing {
+    display: flex; flex-direction: column; gap: .2rem; margin-bottom: 1.6rem
+  }
+  .contact__price { font-size: 2.4rem; font-weight: 700; color: var(--clr-primary) }
+  .benefit { font-size: .9rem; color: var(--clr-muted); margin: .25rem auto }
+
+  .footer {
+    background: #fff; padding: 1.5rem 0; margin-top: 3rem; border-top: 1px solid #e4e6eb
+  }
+  .footer__content {
+    display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;
+    font-size: .85rem; color: var(--clr-muted)
+  }
+  .footer__brand { color: var(--clr-primary); font-weight: 700 }
+
+  @media (max-width: 640px) {
+    .pricing__card { padding: 1.5rem }
+  }
+  </style>
+</head>
+<body>
+
+  <!-- ────────────────  HEADER  ──────────────── -->
+  <header class="header">
+    <div class="container">
+      <div class="header__content">
+        <h1 class="header__title">KaiForge</h1>
+        <div>
+          <span class="header__tagline">For All Table-Tennis Players</span>
+          <button class="btn btn--outline btn--sm" id="notificationToggle">
+            🔔 Notifications (F8)
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ────────────────  HERO  ──────────────── -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero__content">
+        <h1 class="hero__title">Forge Your<br>Table-Tennis<br>Mastery</h1>
+        <p class="hero__subtitle">
+          Track every match, analyze your performance, and unlock your potential with KaiForge – the ultimate table-tennis companion for players of all levels.
+        </p>
+        <div class="hero__badges">
+          <div class="badge"><span class="badge__icon">📱</span><div><span class="badge__title">Android 7.0+</span><br /><span class="badge__subtitle">Compatible</span></div></div>
+          <div class="badge"><span class="badge__icon">🔄</span><div><span class="badge__title">Offline</span><br /><span class="badge__subtitle">No Internet Needed</span></div></div>
+          <div class="badge"><span class="badge__icon">✨</span><div><span class="badge__title">Clean UI</span><br /><span class="badge__subtitle">Easy on Eyes</span></div></div>
+        </div>
+        <button class="btn btn--primary" id="heroCtaBtn">Get KaiForge Now</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ────────────────  FEATURES  ──────────────── -->
+  <section class="features">
+    <div class="container">
+      <h2>Powerful Features Built for You</h2>
+      <p class="hero__subtitle">KaiForge helps all players track, analyze, and improve their game with precision.</p>
+      <div class="features__grid">
+        <div class="feature-card"><div class="feature-card__icon">🏓</div><h3>Match Tracker</h3><p class="feature-card__description">Log every match, score, and opponent info.</p></div>
+        <div class="feature-card"><div class="feature-card__icon">📝</div><h3>Training Log</h3><p class="feature-card__description">Track practice sessions and focus points.</p></div>
+        <div class="feature-card"><div class="feature-card__icon">📊</div><h3>Performance Graphs</h3><p class="feature-card__description">Visual charts to track your growth.</p></div>
+        <div class="feature-card"><div class="feature-card__icon">💡</div><h3>Growth Insights</h3><p class="feature-card__description">Discover strengths and work on weaknesses.</p></div>
+        <div class="feature-card"><div class="feature-card__icon">🎨</div><h3>Clean Theme UI</h3><p class="feature-card__description">Sleek interface for focus and clarity.</p></div>
+        <div class="feature-card"><div class="feature-card__icon">🔒</div><h3>Offline-First</h3><p class="feature-card__description">No login. No internet. Just pure performance.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ────────────────  PRICING  ──────────────── -->
+  <section class="pricing">
+    <div class="container">
+      <h2>Simple One-Time Purchase</h2>
+      <p class="hero__subtitle">No subscriptions. Lifetime access. Instant APK.</p>
+      <div class="pricing__card">
+        <div class="pricing__offer">
+          <span class="pricing__label">Early Bird Offer</span>
+          <div class="pricing__price"><span class="pricing__currency">₹</span>666</div>
+          <p class="pricing__terms">Pay via WhatsApp. Get APK instantly.</p>
+        </div>
+        <div class="pricing__features">
+          <h3>What's Included</h3>
+          <ul class="pricing__features-list">
+            <li>Match tracking</li><li>Training logs</li><li>Progress charts</li><li>Offline & secure</li><li>Clean UI</li><li>No subscription</li>
+          </ul>
+          <h4>Requirements</h4>
+          <p class="pricing__requirements-text">Android 7.0+, 50 MB, No internet needed</p>
+        </div>
+        <button class="btn btn--primary" id="pricingCtaBtn">Buy for ₹666</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ────────────────  CONTACT  ──────────────── -->
+  <section class="contact">
+    <div class="container">
+      <div class="contact__card">
+        <h3>Contact Developer</h3>
+        <div class="contact__info">
+          <div class="contact__method"><span class="contact__label">WhatsApp</span><a href="https://wa.me/919443385650">+91 94433 85650</a></div>
+          <div class="contact__method"><span class="contact__label">Name</span><span>Antonius Jairus</span></div>
+          <div class="contact__method"><span class="contact__label">Delivery</span><span>Instant APK</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ────────────────  WHATSAPP CTA BUTTON  ──────────────── -->
+  <div style="background: var(--clr-primary); padding: 1.8rem 0; text-align: center;">
+    <a href="https://wa.me/919443385650" target="_blank" style="display: inline-block; background: #fff; color: var(--clr-primary); font-weight: 600; padding: 1rem 2rem; border-radius: var(--radius); font-size: 1.1rem; text-decoration: none; box-shadow: var(--shadow); transition: var(--transition);">Make it yours at 666/-</a>
+  </div>
+
+  <!-- ────────────────  FOOTER  ──────────────── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__content">
+        <span class="footer__brand">KaiForge</span>
+        <span>© 2025 Antonius Jairus • All rights reserved</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ──────
+>
