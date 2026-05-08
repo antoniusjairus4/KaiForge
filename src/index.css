@@ -1,0 +1,343 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* KaiForge 2.0 Table Tennis Tracker Design System
+Dual theme support: Light (red primary) and Dark (fluorescent green primary)
+*/
+
+@layer base {
+  :root {
+    /* Light Theme - Custom Color Palette */
+    --background: 0 0% 96%;
+    --foreground: 0 0% 0%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+
+    --primary: 207 85% 34%;  /* Deep blue #0D47A1 */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 172 100% 37%;  /* Teal #00BFA5 */
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+
+    --accent: 45 100% 51%;  /* Amber #FFC107 */
+    --accent-foreground: 0 0% 0%;
+
+    --destructive: 1 84% 61%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 86%;
+    --input: 0 0% 86%;
+    --ring: 207 85% 34%;
+
+    --radius: 0.5rem;
+
+    /* Light glassmorphism effects */
+    --glass-bg: 0 0% 100% / 0.9;
+    --glass-border: 0 0% 86% / 0.5;
+    --glass-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+
+    /* Light background gradient */
+    --bg-gradient: linear-gradient(135deg, hsl(0 0% 96%) 0%, hsl(0 0% 100%) 100%);
+  }
+
+  .dark {
+    /* Dark Theme - Smooth & Cohesive Color Palette */
+    --background: 0 0% 8%;
+    --foreground: 0 0% 98%;
+
+    --card: 0 0% 12%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 12%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 161 100% 50%;  /* Neon green #00FFAB */
+    --primary-foreground: 0 0% 0%;
+
+    --secondary: 349 100% 65%;  /* Vibrant pink #FF4D6D */
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
+
+    --accent: 203 86% 59%;  /* Instagram blue #3897F0 */
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 1 84% 61%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 161 100% 50%;
+
+    --radius: 0.5rem;
+
+    /* Dark glassmorphism effects - smoother blend */
+    --glass-bg: 0 0% 12% / 0.95;
+    --glass-border: 0 0% 20% / 0.3;
+    --glass-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+
+    /* Dark background gradient - subtle and smooth */
+    --bg-gradient: linear-gradient(135deg, hsl(0 0% 8%) 0%, hsl(0 0% 6%) 100%);
+  }
+
+  /* Enhanced Responsive Design */
+  @media (max-width: 480px) {
+    :root {
+      --radius: 0.75rem;
+    }
+    
+    body {
+      font-size: 0.9rem;
+    }
+    
+    .container {
+      padding: 0.8rem;
+    }
+  }
+
+  @media (min-width: 481px) and (max-width: 768px) {
+    :root {
+      --radius: 1rem;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    :root {
+      --radius: 1.25rem;
+    }
+    
+    body {
+      font-size: 1.1rem;
+    }
+  }
+
+  /* Responsive containers */
+  .responsive-container {
+    width: 100%;
+    max-width: 100%;
+    padding: 0.8rem;
+  }
+
+  @media (min-width: 768px) {
+    .responsive-container {
+      max-width: 90%;
+      padding: 1rem;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .responsive-container {
+      max-width: 70%;
+      padding: 1.2rem;
+    }
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-poppins;
+    background: var(--bg-gradient);
+    min-height: 100vh;
+  }
+
+  html {
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+  }
+
+  /* Enhanced mobile touch targets */
+  @media (max-width: 768px) {
+    button, a, input, select, textarea {
+      min-height: 44px;
+    }
+  }
+}
+
+@layer components {
+  /* Glassmorphism card */
+  .glass-card {
+    background: hsl(var(--glass-bg));
+    border: 1px solid hsl(var(--glass-border));
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: var(--glass-shadow);
+    border-radius: var(--radius);
+  }
+
+  /* Responsive text utilities */
+  .text-responsive-sm {
+    font-size: 0.875rem;
+  }
+
+  @media (min-width: 768px) {
+    .text-responsive-sm {
+      font-size: 1rem;
+    }
+  }
+
+  .text-responsive-lg {
+    font-size: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .text-responsive-lg {
+      font-size: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .text-responsive-lg {
+      font-size: 1.75rem;
+    }
+  }
+
+  /* Enhanced animation utilities */
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+    opacity: 0;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out forwards;
+    transform: translateY(20px);
+    opacity: 0;
+  }
+
+  .animate-bounce-in {
+    animation: bounceIn 0.8s ease-out forwards;
+    transform: scale(0.8);
+    opacity: 0;
+  }
+
+  /* Hover effects */
+  .hover-scale {
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .hover-scale:hover {
+    transform: scale(1.02);
+  }
+
+  .hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Mobile-optimized cards */
+  @media (max-width: 768px) {
+    .glass-card {
+      padding: 1rem;
+      margin: 0.5rem 0;
+    }
+  }
+
+  /* Responsive grid utilities */
+  .grid-responsive {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 768px) {
+    .grid-responsive {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .grid-responsive {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}
+
+@layer utilities {
+  .font-poppins {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  /* Responsive padding utilities */
+  .p-responsive {
+    padding: 0.75rem;
+  }
+
+  @media (min-width: 768px) {
+    .p-responsive {
+      padding: 1rem;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .p-responsive {
+      padding: 1.5rem;
+    }
+  }
+
+  /* Smooth scrolling for mobile */
+  .scroll-smooth {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Keyframe animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounceIn {
+  from {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Theme transition animations */
+* {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
