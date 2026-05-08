@@ -1,24 +1,11 @@
-# KaiForge 2.0 - Table Tennis Performance Tracker
-
-<div align="center">
-
-![KaiForge Logo](./public/favicon.png)
+KaiForge 2.0 - Table Tennis Performance Tracker
 
 **Professional Table Tennis Performance Tracking & Analysis Platform**
 
-[Live Demo](https://kaiforge.antoniusjairus.in) • [Report Bug](https://github.com/AntoniusJairus/kaiforge/issues) • [Request Feature](https://github.com/AntoniusJairus/kaiforge/issues)
-
-</div>
-
----
-
 ## Overview
-
 KaiForge is a comprehensive table tennis performance tracking application designed for serious players and coaches. Track your practice sessions, log match results, analyze performance metrics through interactive graphs, and monitor your improvement over time with detailed statistics and performance analytics.
 
 Built with modern web technology and real-time database capabilities, KaiForge provides a seamless experience for managing your table tennis journey.
-
----
 
 ## Key Features
 
@@ -43,8 +30,6 @@ Built with modern web technology and real-time database capabilities, KaiForge p
 - **Mobile-Optimized** - Fully responsive interface for tablet and mobile devices
 - **Dark & Light Modes** - Theme toggle for comfortable usage in any environment
 - **Intuitive UI** - Clean, professional design focused on usability
-
----
 
 ## Technology Stack
 
@@ -104,19 +89,11 @@ VITE_SUPABASE_PUBLISHABLE_KEY=your_anon_key
 VITE_SUPABASE_URL=https://your-project.supabase.co
 ```
 
-Obtain these values from your Supabase project settings:
-- Go to Supabase Dashboard → Settings → API
-- Copy the Project URL and Anon Key
-
 4. **Start the development server**
 ```bash
 npm run dev
 # or
 bun run dev
-```
-
-The application will be available at `http://localhost:5173`
-
 ---
 
 ## Usage Guide
@@ -441,27 +418,6 @@ Contributions are welcome! Please follow these steps:
 4. Push to branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
----
-
-## Roadmap
-
-- [ ] AI-powered performance recommendations
-- [ ] Weekly/monthly performance reports
-- [ ] Social features (match sharing, leaderboards)
-- [ ] Advanced opponent analytics
-- [ ] Mobile app (React Native)
-- [ ] Video integration for match analysis
-- [ ] Export data to PDF/CSV
-- [ ] Integration with tournament management systems
-
----
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
----
-
 ## Support & Contact
 
 **Developer:** Antonius Jairus
@@ -482,10 +438,9 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ---
 
-<div align="center">
 
 Made with ❤️ for table tennis enthusiasts
 
 [Back to Top](#kaiforge-20---table-tennis-performance-tracker)
 
-</div>
+
