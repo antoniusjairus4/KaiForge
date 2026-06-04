@@ -95,18 +95,20 @@ const Tournament = () => {
     fetchTournaments();
   }, []);
 
-  useEffect(() => {
-    const fetchAllTournamentStats = async () => {
-      const statsMap: Record<string, { total: number; wins: number; losses: number }> = {};
-      for (const tournament of tournaments) {
-        const stats = await getTournamentStats(tournament.id);
-        statsMap[tournament.id] = stats;
-      }
-      setTournamentStats(statsMap);
-    };
+  const fetchAllTournamentStats = async (tournamentList: Tournament[]) => {
+    const statsMap: Record<string, { total: number; wins: number; losses: number }> = {};
+    for (const tournament of tournamentList) {
+      const stats = await getTournamentStats(tournament.id);
+      statsMap[tournament.id] = stats;
+    }
+    setTournamentStats(statsMap);
+  };
 
+  useEffect(() => {
     if (tournaments.length > 0) {
-      fetchAllTournamentStats();
+      fetchAllTournamentStats(tournaments);
+    } else {
+      setTournamentStats({});
     }
   }, [tournaments]);
 
@@ -115,8 +117,11 @@ const Tournament = () => {
       fetchTournamentMatches(selectedTournament.id);
       fetchLeagueMatches(selectedTournament.id);
       refreshTournamentStats(selectedTournament.id);
+    } else if (tournaments.length > 0) {
+      // Re-sync card counters whenever user returns to tournament list.
+      fetchAllTournamentStats(tournaments);
     }
-  }, [selectedTournament]);
+  }, [selectedTournament, tournaments]);
 
   const refreshTournamentStats = async (tournamentId: string) => {
     const stats = await getTournamentStats(tournamentId);
