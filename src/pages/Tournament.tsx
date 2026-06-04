@@ -114,8 +114,17 @@ const Tournament = () => {
     if (selectedTournament) {
       fetchTournamentMatches(selectedTournament.id);
       fetchLeagueMatches(selectedTournament.id);
+      refreshTournamentStats(selectedTournament.id);
     }
   }, [selectedTournament]);
+
+  const refreshTournamentStats = async (tournamentId: string) => {
+    const stats = await getTournamentStats(tournamentId);
+    setTournamentStats((prev) => ({
+      ...prev,
+      [tournamentId]: stats,
+    }));
+  };
 
   const fetchTournaments = async () => {
     try {
@@ -326,6 +335,7 @@ const Tournament = () => {
       setIsMatchDialogOpen(false);
       resetMatchForm();
       fetchTournamentMatches(selectedTournament.id);
+      refreshTournamentStats(selectedTournament.id);
     } catch (error) {
       console.error("Error saving match:", error);
       toast({
@@ -394,6 +404,7 @@ const Tournament = () => {
       toast({ title: "Success", description: "Match deleted!" });
       if (selectedTournament) {
         fetchTournamentMatches(selectedTournament.id);
+        refreshTournamentStats(selectedTournament.id);
       }
     } catch (error) {
       console.error("Error deleting match:", error);
@@ -445,6 +456,7 @@ const Tournament = () => {
       setIsLeagueMatchDialogOpen(false);
       resetLeagueMatchForm();
       fetchLeagueMatches(selectedTournament.id);
+      refreshTournamentStats(selectedTournament.id);
     } catch (error) {
       console.error("Error saving league match:", error);
       toast({
@@ -479,6 +491,7 @@ const Tournament = () => {
       toast({ title: "Success", description: "League match deleted!" });
       if (selectedTournament) {
         fetchLeagueMatches(selectedTournament.id);
+        refreshTournamentStats(selectedTournament.id);
       }
     } catch (error) {
       console.error("Error deleting league match:", error);
@@ -492,17 +505,27 @@ const Tournament = () => {
 
   const getTournamentStats = async (tournamentId: string) => {
     try {
-      const { data, error } = await supabase
-        .from("performances")
-        .select("*")
-        .eq("tournament_reference", tournamentId);
+      const [knockoutResponse, leagueResponse] = await Promise.all([
+        supabase
+          .from("performances")
+          .select("result")
+          .eq("tournament_reference", tournamentId),
+        supabase
+          .from("league_matches")
+          .select("result")
+          .eq("tournament_id", tournamentId),
+      ]);
 
-      if (error) throw error;
-      
-      const tournamentMatches = data || [];
-      const wins = tournamentMatches.filter(m => m.result === "Win").length;
-      const losses = tournamentMatches.filter(m => m.result === "Loss").length;
-      return { total: tournamentMatches.length, wins, losses };
+      if (knockoutResponse.error) throw knockoutResponse.error;
+      if (leagueResponse.error) throw leagueResponse.error;
+
+      const knockoutMatches = knockoutResponse.data || [];
+      const leagueMatchesData = leagueResponse.data || [];
+      const allMatches = [...knockoutMatches, ...leagueMatchesData];
+      const wins = allMatches.filter((m) => m.result === "Win").length;
+      const losses = allMatches.filter((m) => m.result === "Loss").length;
+
+      return { total: allMatches.length, wins, losses };
     } catch (error) {
       console.error("Error fetching tournament stats:", error);
       return { total: 0, wins: 0, losses: 0 };
